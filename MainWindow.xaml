@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SwitchSpineBuilder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Switch Spine Builder" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -44,6 +44,14 @@
                 <TextBlock Text="Search:" Margin="0,0,4,0"/>
                 <TextBox Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
             </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Margin="10,10,5,5" Content="Select All" Command="{Binding SelectAll}"/>
+                <Button Margin="5,10,10,5" Grid.Column="1" Content="Clear Selected" Command="{Binding ClearAll}"/>
+            </Grid>
             <ListView ItemsSource="{Binding SelectedSpines}" Height="200" Margin="10">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -51,7 +59,16 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Margin="10,10,5,5" Content="Save Selection" Command="{Binding SaveSelect}"/>
+                <Button Margin="5,10,10,5" Grid.Column="1" Content="Load Selection" Command="{Binding LoadSelect}"/>
+            </Grid>
             <Button Content="Build Image" Command="{Binding BuildImage}" Margin="10"/>
+            <TextBlock Text="{Binding Status}" Margin="10,0"/>
         </StackPanel>
     </Grid>
 </Window>
