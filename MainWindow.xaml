@@ -40,7 +40,7 @@
         </ItemsControl>
         </ScrollViewer>
         <StackPanel Grid.Column="1" Orientation="Vertical" Margin="8">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Margin="10">
                 <TextBlock Text="Search:" Margin="0,0,4,0"/>
                 <TextBox Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
             </StackPanel>
@@ -67,7 +67,12 @@
                 <Button Margin="10,10,5,5" Content="Save Selection" Command="{Binding SaveSelect}"/>
                 <Button Margin="5,10,10,5" Grid.Column="1" Content="Load Selection" Command="{Binding LoadSelect}"/>
             </Grid>
-            <Button Content="Build Image" Command="{Binding BuildImage}" Margin="10"/>
+            <StackPanel Orientation="Horizontal" Margin="10,6,0,0">
+                <TextBlock Text="Pixel Gap:" Margin="0,0,4,0"/>
+                <TextBox Text="{Binding PixelGap, Mode=TwoWay}" Width="40" />
+                <TextBlock Foreground="Gray" Text="Represents the pixel gap between each spine." Margin="10,0"/>
+            </StackPanel>
+            <Button Content="Build Images + PDF" Command="{Binding BuildImage}" Margin="10"/>
             <TextBlock Text="{Binding Status}" Margin="10,0" TextWrapping="Wrap"/>
         </StackPanel>
     </Grid>

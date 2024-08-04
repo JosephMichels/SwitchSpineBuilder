@@ -63,6 +63,13 @@ namespace SwitchSpineBuilder
             }
         }
 
+        int _pixelGap = 20;
+        public int PixelGap
+        {
+            get { return _pixelGap; }
+            set { SetProperty(ref _pixelGap, value); }
+        }
+
         public MainViewModel()
         {
             if (!Directory.Exists("Spines"))
@@ -104,7 +111,7 @@ namespace SwitchSpineBuilder
                 Status = "Generating images";
                 Task.Run(() =>
                 {
-                    var files = ImageBuilder.BuildImages(_spines.Where(s => s.Selected).Select(s => s.FullPath).ToArray(), 20, (cur, total) => { Status = $"Generating Images - {cur} of {total} complete"; });
+                    var files = ImageBuilder.BuildImages(_spines.Where(s => s.Selected).Select(s => s.FullPath).ToArray(), PixelGap, (cur, total) => { Status = $"Generating Images - {cur} of {total} complete"; });
                     Status = "Building PDF file";
                     ImageBuilder.BuildPdf(files);
                     Status = "Generation complete";
