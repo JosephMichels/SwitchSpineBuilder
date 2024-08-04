@@ -65,6 +65,9 @@ namespace SwitchSpineBuilder
 
         public MainViewModel()
         {
+            if (!Directory.Exists("Spines"))
+                Directory.CreateDirectory("Spines");
+
             var dirInfo = new DirectoryInfo("Spines");
             var extensions = new[] { "*.png", "*.jpg", "*.webp" };
             var spines = extensions.SelectMany(ext => dirInfo.GetFiles(ext));
@@ -88,8 +91,16 @@ namespace SwitchSpineBuilder
             }
             Spines.AddRange(_spines);
 
+            if (_spines.Count == 0)
+                Status = "No spines found in the 'Spines' directory. Please add some, then reload the application.";
+
             BuildImage = new DelegateCommand(() =>
             {
+                if (_spines.Count(d => d.Selected) == 0)
+                {
+                    Status = "No Spines selected. Please select some spines first.";
+                    return;
+                }
                 Status = "Generating images";
                 Task.Run(() =>
                 {
